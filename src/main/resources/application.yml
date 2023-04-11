@@ -1,0 +1,45 @@
+logging:
+  level:
+    '[org.springframework]': warn
+    '[org.springframework.cloud.aws]': debug
+    '[graphql]': warn
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          cognito:
+            client-id: 1p4enmm6ngc1a09p2rar8rrg35
+            client-secret: 17uat7lt4ifmt20jj7d3ufuaji0flgtqucg6v66pe04eor15r34
+            scope: openid
+            redirect-uri: https://localhost:8443/login/oauth2/code/cognito
+            client-name: vortex-api
+        provider:
+          cognito:
+            issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_fKAcU9Ryb
+            user-name-attribute: cognito:username
+      resourceserver:
+        jwt:
+          issuer-uri: https://cognito-idp.us-east-1.amazonaws.com/us-east-1_fKAcU9Ryb
+  datasource:
+    hikari:
+      connection-timeout: 30000
+      maximum-pool-size: 10
+    username: root
+    password: charlie888
+    url: jdbc:mysql://localhost:3306/mktech_2022
+  jpa:
+    hibernate:
+      ddl-auto: update
+      format-sql: true
+      database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+  thymeleaf:
+    mode: HTML
+server:
+  port: 8443
+  ssl:
+    key-store: classpath:bedford-key.p12
+    key-store-password: doppleg
+    key-store-type: pkcs12
